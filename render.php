@@ -29,7 +29,7 @@ function zawiw_share_shortcode( $atts ) {
         echo "<div class='entry'>$zawiw_share_message</div>";
     }
 ?>
-    <div class="upload">
+    <div id="zawiw_share_uploader">
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Form protection -->
             <?php wp_nonce_field( 'zawiw_share_upload' ); ?>
@@ -40,7 +40,7 @@ function zawiw_share_shortcode( $atts ) {
     </div>
 
     <!-- container for total size bar -->
-    <div id="totalSize"><div class='bar'></div><div class='text'></div></div>
+    <div id="zawiw_share_meter"><div class='bar'></div><div class='text'></div></div>
     <?php
 
     // Database query to get all files
@@ -57,8 +57,9 @@ function zawiw_share_shortcode( $atts ) {
     // Iterate over all files in array and print them in html
     // also calculates total file size
 
-    foreach ( $zawiw_share_items as $file ) {
-?>
+    ?>
+    <div id="zawiw_share_uploads">
+    <?php foreach ( $zawiw_share_items as $file ) : ?>
         <div class="file one-third">
             <?php if ( wp_get_current_user()->ID==$file['owner'] ): ?>
                 <div>
@@ -78,9 +79,10 @@ function zawiw_share_shortcode( $atts ) {
         </div>
         <?php
         $zawiw_share_total_size += $file['size'];
-    }
-    echo "<script type='text/javascript'>updateFilesize($zawiw_share_total_size);</script>"   ;
-
+    endforeach; ?>
+    <script type='text/javascript'>updateFilesize(<?php echo $zawiw_share_total_size ?>);</script>
+    </div>
+    <?php
     // end buffered output
     $output = ob_get_contents();
     ob_end_clean();

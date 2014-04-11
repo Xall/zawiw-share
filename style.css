@@ -1,39 +1,36 @@
-#totalSize {
+#zawiw_share_meter {
     margin: 10px 0;
     border: 1px solid #eeeee8;
     height: 30px;
     position: relative;
     clear: both;
 }
-#totalSize .bar{
+#zawiw_share_meter .bar{
     background-color: #cccccc;
     position: absolute;
     height: 30px;
 }
-#totalSize .text{
+#zawiw_share_meter .text{
     padding: 4px 10px;
     position: absolute;
     height: 20px;
 }
-#zawiw_share_upload{
-    //float: right;
-}
 
-.file{
+#zawiw_share_uploads .file{
     margin: 5px 4px!important;
     background-color: #ddd;
     padding-left: 5px;
 }
-.fa{
+#zawiw_share_uploads .fa{
     margin-right: 3px;
     color: #999;
 }
-.linkButton{
+#zawiw_share_uploads .linkButton{
     padding: 3px 6px!important;
     float: right;
     margin-right: 5px;
 }
-.name{
+#zawiw_share_uploads .name{
     white-space: nowrap;
     display: block;
     width: 130px;
