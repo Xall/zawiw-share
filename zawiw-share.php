@@ -6,7 +6,7 @@ Description: Einfaches Teilen von Dateien
 Version: 1.0
 Author: Simon Volpert
 Author URI: http://svolpert.eu
-License: GPLv2
+License: MIT
 */
 
 
@@ -17,7 +17,6 @@ $zawiw_share_message = "";
 require_once dirname( __FILE__ ) .'/database.php';
 require_once dirname( __FILE__ ) .'/render.php';
 require_once dirname( __FILE__ ) .'/upload.php';
-// require_once dirname( __FILE__ ) .'/uninstall.php';
 
 
 ?>
