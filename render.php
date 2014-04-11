@@ -12,6 +12,9 @@ add_action( 'wp_enqueue_scripts', 'zawiw_share_queue_script' );
 // Generates a form to upload a file
 function zawiw_share_shortcode( $atts ) {
 
+    // start buffered output
+    ob_start();
+
     global $zawiw_share_message;
     // used to calculate total size of all files
     $zawiw_share_total_size = 0;
@@ -26,9 +29,6 @@ function zawiw_share_shortcode( $atts ) {
         echo "<div class='entry'>$zawiw_share_message</div>";
     }
 ?>
-    <p>Datei hochladen: Wählen Sie durch klicken auf die Schaltfläche unten eine Datei aus. Klicken Sie anschließend auf "Hochladen". Nun startet der Upload, was je nach Dateigröße unterschiedlich lange dauern kann. Am unteren Rand Ihres Browsers finden Sie eine Fortschrittsanzeige</p>
-    <p>Datei herunterladen: Klicken Sie auf den Namen der Datei die Sie herunterladen möchten</p>
-    <p>Datei löschen: Klicken Sie auf das Kreuz neben dem Dateinamen um die Datei zu löschen. Dies kann nur derjenige tun, der die Datei auch hochgeladen hat.</p>
     <div class="upload">
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Form protection -->
@@ -80,6 +80,12 @@ function zawiw_share_shortcode( $atts ) {
         $zawiw_share_total_size += $file['size'];
     }
     echo "<script type='text/javascript'>updateFilesize($zawiw_share_total_size);</script>"   ;
+
+    // end buffered output
+    $output = ob_get_contents();
+    ob_end_clean();
+
+    return $output;
 
 }
 
