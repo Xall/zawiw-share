@@ -33,6 +33,5 @@
 #zawiw_share_uploads .name{
     white-space: nowrap;
     display: block;
-    width: 130px;
     overflow: hidden;
 }

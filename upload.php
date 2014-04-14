@@ -56,7 +56,6 @@ function zawiw_share_process_upload() {
 
     // Check if file actually exists
     if ( isset( $movefile['error'] ) ) {
-        echo $movefile['error'];
         $zawiw_share_message = $movefile['error'];
         return;
     }
