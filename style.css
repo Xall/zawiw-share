@@ -35,3 +35,14 @@
     display: block;
     overflow: hidden;
 }
+
+#zawiw_share_uploader fieldset{
+    background-color: #ddd;
+    padding: 10px;
+}
+#zawiw_share_uploader #zawiw_share_picker{
+    background-color: #fff;
+}
+#zawiw_share_uploader #zawiw_share_upload{
+    margin-top: 10px;
+}

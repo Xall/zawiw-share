@@ -33,8 +33,14 @@ function zawiw_share_shortcode( $atts ) {
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Form protection -->
             <?php wp_nonce_field( 'zawiw_share_upload' ); ?>
-            <input id="zawiw_share_picker" type="file" name="file" id="file">
-            <input id="zawiw_share_upload" type="submit" name="submit" value="Hochladen">
+            <fieldset>
+                <input id="zawiw_share_picker" type="file" name="file">
+                <input id="zawiw_share_upload" type="submit" name="submit" value="Hochladen">
+            </fieldset>
+            <fieldset>
+                <label for="name">Anzeigename: </label>
+                <input id="zawiw_share_name" type="text" name="displayname"><br>
+            </fieldset>
             <input type="hidden" name="zawiw_share" value="upload" />
         </form>
     </div>

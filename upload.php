@@ -35,8 +35,6 @@ function zawiw_share_process_upload() {
     // Get fileinfos from env
     $uploadedfile = $_FILES['file'];
 
-    // echo "<pre>";
-    // print_r( $uploadedfile );
 
     // Error when spacelimit exceeded
     if ($totalsize + $uploadedfile['size'] > (100*1024*1024)) {
@@ -62,13 +60,15 @@ function zawiw_share_process_upload() {
 
     $zawiw_share_message = "Datei erfolgreich hochgeladen.";
 
-    // print_r( $movefile );
-    // echo "</pre>";
-
     // Prepare an array to store in db
     $file_data = array();
     $current_user = wp_get_current_user();
-    $file_data['name'] = isset( $uploadedfile['name'] ) ? $uploadedfile['name'] : '';
+    // Displayname
+    if (strlen($_POST['displayname'])) {
+        $file_data['name'] = $_POST['displayname'];
+    }else{
+        $file_data['name'] = isset( $uploadedfile['name'] ) ? $uploadedfile['name'] : '';
+    }
     $file_data['owner'] = $current_user->ID;
     $file_data['size'] = isset( $uploadedfile['size'] ) ? $uploadedfile['size'] : '';
     $file_data['url'] = isset( $movefile['url'] ) ? $movefile['url'] : '';
