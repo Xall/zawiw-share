@@ -49,6 +49,7 @@ function zawiw_share_process_upload() {
     $upload_overrides = array( 'test_form' => false );
     $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
 
+
     // Disable reaction on uploads
     remove_filter( 'upload_dir', 'zawiw_share_change_upload_dir' );
 
@@ -56,6 +57,21 @@ function zawiw_share_process_upload() {
     if ( isset( $movefile['error'] ) ) {
         $zawiw_share_message = $movefile['error'];
         return;
+    }
+
+    //Check if its an image
+    $filetype = wp_check_filetype( $movefile['file'] );
+    if( strpos($filetype['type'],'image' )!== false){
+        // Create editor instance to resize the image
+        $image = wp_get_image_editor( $movefile['file'] );
+        if ( ! is_wp_error( $image ) ) {
+            $image->resize( 300, 300, true );
+            $pathinfo = pathinfo($movefile['file']);
+            // save the new image as x_thumb.y
+            $image->save( $pathinfo['dirname'].'/'.$pathinfo['filename'].'_thumb'.'.'.$pathinfo['extension'] );
+        }else{
+            // TODO
+        }
     }
 
     $zawiw_share_message = "Datei erfolgreich hochgeladen.";
@@ -101,14 +117,22 @@ function zawiw_share_process_delete() {
         $file = $wpdb->get_results( $wpdb->prepare( $query, null ), ARRAY_A );
         $file = $file[0];
         // delete file
-        if ( !unlink( $file['file'] ) ) throw new Exception( "Error unlinking file", 1 );
+        if ( file_exists($file['file'] ) and !unlink( $file['file'] ) ) {
+            throw new Exception( "Error unlinking file", 1 );
+        }
+        $pathinfo = pathinfo($file['file']);
+
+        $thumb_path = $pathinfo['dirname'].'/'.$pathinfo['filename'].'_thumb'.'.'.$pathinfo['extension'] ;
+        if ( file_exists($thumb_path ) and !unlink( $thumb_path ) ){
+           throw new Exception( "Error unlinking file", 1 );
+       }
 
         // Delete db entry
-        $wpdb->delete( $wpdb->get_blog_prefix() . 'zawiw_share_data', array( 'ID' => $fileID ) );
-        $zawiw_share_message = "Datei erfolgreich gelöscht.";
-    } catch ( Exception $e ) {
-        $zawiw_share_message = "Beim Löschen der Datei ist ein Fehler aufgetreten.";
-    }
+       $wpdb->delete( $wpdb->get_blog_prefix() . 'zawiw_share_data', array( 'ID' => $fileID ) );
+       $zawiw_share_message = "Datei erfolgreich gelöscht.";
+   } catch ( Exception $e ) {
+    $zawiw_share_message = "Beim Löschen der Datei ist ein Fehler aufgetreten.";
+}
 }
 
 ?>

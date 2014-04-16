@@ -13,6 +13,13 @@ jQuery( document ).ready(function() {
     // Clearing form data
     // var form = jQuery("#zawiw_share_picker form");
     // form.get(0).reset();
+    jQuery("#zawiw_share_uploads .file").mouseover(function() {
+        var thumb = jQuery(this).attr('thumb');
+        jQuery(this).css({"background-image":"url(\""+thumb+"\")"})
+    });
+    jQuery("#zawiw_share_uploads .file").mouseout(function() {
+        console.log(this);
+        jQuery(this).css({"background-image":"none"});
+    });
 
 });
-

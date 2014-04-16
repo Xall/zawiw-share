@@ -26,7 +26,7 @@ function zawiw_share_shortcode( $atts ) {
     }
     // Show global message if available
     if ( strlen( $zawiw_share_message ) ) {
-        echo "<div class='entry'>$zawiw_share_message</div>";
+        echo "<div id='zawiw_share_message' class='entry'>$zawiw_share_message</div>";
     }
 ?>
     <div id="zawiw_share_uploader">
@@ -66,7 +66,21 @@ function zawiw_share_shortcode( $atts ) {
     ?>
     <div id="zawiw_share_uploads">
     <?php foreach ( $zawiw_share_items as $file ) : ?>
-        <div class="file one-third">
+        <?php
+            $style = "";
+            // find thumbnail
+            $pathinfo = pathinfo($file['file']);
+            $thumb_path = $pathinfo['dirname'].'/'.$pathinfo['filename'].'_thumb'.'.'.$pathinfo['extension'] ;
+            if (file_exists($thumb_path )) {
+                $pathinfo = pathinfo($file['url']);
+                $thumb_path = $pathinfo['dirname'].'/'.$pathinfo['filename'].'_thumb'.'.'.$pathinfo['extension'] ;
+                echo $thumb_path;
+            }else{
+                $thumb_path ='';
+            }
+
+         ?>
+        <div class="file one-third" thumb="<?php echo $thumb_path ?>">
             <?php if ( wp_get_current_user()->ID==$file['owner'] ): ?>
                 <div>
                     <form action="" method="post" enctype="multipart/form-data">
