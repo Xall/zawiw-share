@@ -74,7 +74,6 @@ function zawiw_share_shortcode( $atts ) {
             if (file_exists($thumb_path )) {
                 $pathinfo = pathinfo($file['url']);
                 $thumb_path = $pathinfo['dirname'].'/'.$pathinfo['filename'].'_thumb'.'.'.$pathinfo['extension'] ;
-                echo $thumb_path;
             }else{
                 $thumb_path ='';
             }

@@ -18,7 +18,6 @@ jQuery( document ).ready(function() {
         jQuery(this).css({"background-image":"url(\""+thumb+"\")"})
     });
     jQuery("#zawiw_share_uploads .file").mouseout(function() {
-        console.log(this);
         jQuery(this).css({"background-image":"none"});
     });
 
