@@ -51,10 +51,14 @@ function zawiw_share_shortcode( $atts ) {
 
     // Database query to get all files
     global $wpdb;
-    $zawiw_share_query = 'SELECT * FROM ';
-    $zawiw_share_query .= $wpdb->get_blog_prefix() . 'zawiw_share_data ';
-    $zawiw_share_query .= 'ORDER by time DESC';
-    $zawiw_share_items = $wpdb->get_results( $wpdb->prepare( $zawiw_share_query, null ), ARRAY_A );
+    $meta_field1 = 'time';
+    $zawiw_share_query =
+    "
+    SELECT      *
+    FROM        $wpdb->prefix"."zawiw_share_data
+    ORDER BY    time DESC;
+    ";
+    $zawiw_share_items = $wpdb->get_results( $zawiw_share_query, ARRAY_A );
 
     // echo "<pre>";
     // print_r($zawiw_share_items);

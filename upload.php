@@ -25,8 +25,12 @@ function zawiw_share_process_upload() {
     global $wpdb;
 
     // Calculate total filesize in Database
-    $query = "SELECT * FROM ".$wpdb->get_blog_prefix() . 'zawiw_share_data';
-    $files = $wpdb->get_results( $wpdb->prepare( $query, null ), ARRAY_A );
+    $query =
+    "
+    SELECT      *
+    FROM        $wpdb->prefix"."zawiw_share_data
+    ";
+    $files = $wpdb->get_results( $query, ARRAY_A );
     $totalsize = 0;
     foreach ($files as $file) {
         $totalsize += $file['size'];
@@ -111,10 +115,15 @@ function zawiw_share_process_delete() {
     // Save post data
     $fileID = $_POST['zawiw_share_delete_id'];
     // Prepare query "select * from db where id = #"
-    $query = "SELECT * FROM " . $wpdb->get_blog_prefix() . 'zawiw_share_data WHERE id='.$fileID;
+    $query =
+    "
+    SELECT      *
+    FROM        $wpdb->prefix"."zawiw_share_data
+    WHERE       id=%d;
+    ";
     try {
         // run query
-        $file = $wpdb->get_results( $wpdb->prepare( $query, null ), ARRAY_A );
+        $file = $wpdb->get_results( $wpdb->prepare( $query, $fileID ), ARRAY_A );
         $file = $file[0];
         // delete file
         if ( file_exists($file['file'] ) and !unlink( $file['file'] ) ) {
