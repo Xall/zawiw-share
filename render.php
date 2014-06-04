@@ -96,7 +96,7 @@ function zawiw_share_shortcode( $atts ) {
                 </div>
             <?php endif ?>
                 <div class="name"><a href="<?php echo $file['url'] ?>"><?php echo $file['name']." " ?></a></div>
-                <div class="owner"><i class="fa fa-user"></i><?php echo get_userdata( $file['owner'] )?get_userdata( $file['owner'] )->user_login:"Unbekannt" ?> </div>
+                <div class="owner"><i class="fa fa-user"></i><?php echo get_userdata( $file['owner'] )?get_userdata( $file['owner'] )->display_name:"Unbekannt" ?> </div>
                 <div class="time"><i class="fa fa-calendar"></i><?php echo $file['time'] ?></div>
                 <div class="size"><i class="fa fa-floppy-o"></i><?php echo round( $file['size']/1024/1024, 2 )?> MB</div>
         </div>
