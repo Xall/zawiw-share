@@ -34,7 +34,7 @@
     margin-right: 5px;
 }
 #zawiw_share_uploads .name{
-    white-space: nowrap;
+    /*white-space: nowrap; disables multiline to achieve perfect grid */
     display: block;
     overflow: hidden;
 }
