@@ -92,7 +92,7 @@ function zawiw_share_process_upload() {
     }
     // Copyright
     if (strlen($_POST['copyright'])) {
-        $file_data['copyright'] = htmlspecialchars($_POST['displayname']);
+        $file_data['copyright'] = htmlspecialchars($_POST['copyright']);
     }else{
         $file_data['copyright'] = '';
     }
