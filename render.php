@@ -40,6 +40,8 @@ function zawiw_share_shortcode( $atts ) {
             <fieldset>
                 <label for="name">Anzeigename: </label>
                 <input id="zawiw_share_name" type="text" name="displayname"><br>
+                <label for="name">Urheber/Lizenz: </label>
+                <input id="zawiw_share_copyright" type="text" name="copyright"><br>
             </fieldset>
             <input type="hidden" name="zawiw_share" value="upload" />
         </form>
@@ -96,7 +98,8 @@ function zawiw_share_shortcode( $atts ) {
                 </div>
             <?php endif ?>
                 <div class="name"><a href="<?php echo $file['url'] ?>"><?php echo $file['name']." " ?></a></div>
-                <div class="owner"><i class="fa fa-user"></i><?php echo get_userdata( $file['owner'] )?get_userdata( $file['owner'] )->display_name:"Unbekannt" ?> </div>
+                <div class="owner"><i class="fa fa-user"></i><?php echo get_userdata( $file['owner'] )? get_userdata( $file['owner'] )->display_name:"Unbekannt" ?> </div>
+                <div class="copyright">© <?php echo strlen($file['copyright']) ? $file['copyright'] : "Unbekannt" ?> </div>
                 <div class="time"><i class="fa fa-calendar"></i><?php echo $file['time'] ?></div>
                 <div class="size"><i class="fa fa-floppy-o"></i><?php echo round( $file['size']/1024/1024, 2 )?> MB</div>
         </div>

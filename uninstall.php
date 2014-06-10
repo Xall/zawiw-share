@@ -23,7 +23,7 @@ zawiw_share_drop_table( $wpdb->prefix );
 
 function zawiw_share_drop_table( $prefix ) {
     global $wpdb;
-    $wpdb->query( $wpdb->prepare( 'DROP TABLE ' . $prefix . 'zawiw_share_data' ) );
+    $wpdb->query( 'DROP TABLE ' . $prefix . 'zawiw_share_data' ) ;
 }
 
 

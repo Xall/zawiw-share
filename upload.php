@@ -42,7 +42,7 @@ function zawiw_share_process_upload() {
 
     // Error when spacelimit exceeded
     if ($totalsize + $uploadedfile['size'] > (100*1024*1024)) {
-        $zawiw_share_message = "Uploadvolumen erreicht. Bitte geben Sie zuerst Spericherplatz frei, indem Sie alte Dateien löschen.";
+        $zawiw_share_message = "Uploadvolumen erreicht. Bitte geben Sie zuerst Speicherplatz frei, indem Sie alte Dateien löschen.";
         return;
     }
 
@@ -50,6 +50,7 @@ function zawiw_share_process_upload() {
     add_filter( 'upload_dir', 'zawiw_share_change_upload_dir' );
 
     // Move uploaded file from temp to subdir
+    // No idea why test_form is nescessary  :)
     $upload_overrides = array( 'test_form' => false );
     $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
 
@@ -85,9 +86,15 @@ function zawiw_share_process_upload() {
     $current_user = wp_get_current_user();
     // Displayname
     if (strlen($_POST['displayname'])) {
-        $file_data['name'] = $_POST['displayname'];
+        $file_data['name'] = htmlspecialchars($_POST['displayname']);
     }else{
         $file_data['name'] = isset( $uploadedfile['name'] ) ? $uploadedfile['name'] : '';
+    }
+    // Copyright
+    if (strlen($_POST['copyright'])) {
+        $file_data['copyright'] = htmlspecialchars($_POST['displayname']);
+    }else{
+        $file_data['copyright'] = '';
     }
     $file_data['owner'] = $current_user->ID;
     $file_data['size'] = isset( $uploadedfile['size'] ) ? $uploadedfile['size'] : '';

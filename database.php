@@ -38,6 +38,7 @@ function zawiw_share_create_db( $prefix ) {
       time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
       name tinytext NOT NULL,
       owner int(20) NOT NULL,
+      copyright tinytext NOT NULL,
       url tinytext NOT NULL,
       file tinytext NOT NULL,
       size int(20) NOT NULL,
