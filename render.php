@@ -71,7 +71,7 @@ function zawiw_share_shortcode( $atts ) {
 
     ?>
     <div id="zawiw_share_uploads">
-    <?php foreach ( $zawiw_share_items as $file ) : ?>
+    <?php foreach ( $zawiw_share_items as $key=>$file ) : ?>
         <?php
             $style = "";
             // find thumbnail
@@ -85,7 +85,7 @@ function zawiw_share_shortcode( $atts ) {
             }
 
          ?>
-        <div class="file one-third" thumb="<?php echo $thumb_path ?>">
+        <div class="<?php echo !($key % 3) ? "first " :"" ?>file one-third" thumb="<?php echo $thumb_path ?>">
             <?php if ( wp_get_current_user()->ID==$file['owner'] ): ?>
                 <div>
                     <form action="" method="post" enctype="multipart/form-data">

@@ -1,3 +1,4 @@
+/*upload volume bar*/
 #zawiw_share_meter {
     margin: 10px 0;
     border: 1px solid #eeeee8;
@@ -24,6 +25,7 @@
     background-position: center;
 
 }
+/*icon*/
 #zawiw_share_uploads .fa{
     margin-right: 3px;
     color: #999;
