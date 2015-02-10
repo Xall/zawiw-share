@@ -86,7 +86,7 @@ function zawiw_share_shortcode( $atts ) {
 
          ?>
         <div class="<?php echo !($key % 3) ? "first " :"" ?>file one-third" thumb="<?php echo $thumb_path ?>">
-            <?php if ( wp_get_current_user()->ID==$file['owner'] ): ?>
+            <?php if ( wp_get_current_user()->ID==$file['owner'] || current_user_can( 'manage_options' ) ): ?>
                 <div>
                     <form action="" method="post" enctype="multipart/form-data">
                     <!-- Form protection -->
