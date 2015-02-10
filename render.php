@@ -118,12 +118,18 @@ function zawiw_share_shortcode( $atts ) {
 }
 
 function zawiw_share_queue_stylesheet() {
+    global $post;   //Contains the whole site content
+    if(!has_shortcode($post->post_content, 'zawiw-share'))   //Loads stylesheets only if shortcode exists
+        return;
     wp_enqueue_style( 'zawiw_share_style', plugins_url( 'style.css', __FILE__ ) );
     wp_enqueue_style( 'font_awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' );
 }
 
 function zawiw_share_queue_script()
 {
+    global $post;   //Contains the whole site content
+    if(!has_shortcode($post->post_content, 'zawiw-share'))   //Loads stylesheets only if shortcode exists
+        return;
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'zawiw_share_script', plugins_url( 'helper.js', __FILE__ ) );
 }
