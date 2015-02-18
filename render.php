@@ -86,7 +86,7 @@ function zawiw_share_shortcode( $atts ) {
 
          ?>
         <div class="<?php echo !($key % 3) ? "first " :"" ?>file one-third" thumb="<?php echo $thumb_path ?>">
-            <?php if ( wp_get_current_user()->ID==$file['owner'] ): ?>
+            <?php if ( wp_get_current_user()->ID==$file['owner'] || current_user_can( 'manage_options' ) ): ?>
                 <div>
                     <form action="" method="post" enctype="multipart/form-data">
                     <!-- Form protection -->
@@ -118,12 +118,18 @@ function zawiw_share_shortcode( $atts ) {
 }
 
 function zawiw_share_queue_stylesheet() {
+    global $post;   //Contains the whole site content
+    if(!has_shortcode($post->post_content, 'zawiw-share'))   //Loads stylesheets only if shortcode exists
+        return;
     wp_enqueue_style( 'zawiw_share_style', plugins_url( 'style.css', __FILE__ ) );
     wp_enqueue_style( 'font_awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' );
 }
 
 function zawiw_share_queue_script()
 {
+    global $post;   //Contains the whole site content
+    if(!has_shortcode($post->post_content, 'zawiw-share'))   //Loads stylesheets only if shortcode exists
+        return;
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'zawiw_share_script', plugins_url( 'helper.js', __FILE__ ) );
 }

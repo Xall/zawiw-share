@@ -3,8 +3,8 @@
 Plugin Name: ZAWiW Share
 Plugin URI:
 Description: Einfaches Teilen von Dateien
-Version: 1.3
-Author: Simon Volpert
+Version: 1.3.2
+Author: Simon Volpert, Sascha Winkelhofer
 Author URI: http://svolpert.eu
 License: MIT
 */

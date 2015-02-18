@@ -5,6 +5,7 @@ Wordpress Plugin: Simple file sharing
 
 Changelog
 =========
+* 1.3.2 Allows admins to delete files, too + only load resources if necessary
 * 1.3.1 Perfect raster even for different lines per download
 * 1.3 Added the ability to set copyright informations for a file
 * 1.2 Thumbnails for images
